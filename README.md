@@ -51,7 +51,7 @@ The suffix (e.g., `-e1`, `-e2`, etc.) is used to differentiate employees within 
 
 - **Querying the Kong Admin API for Basic Auth:**  
   An HTTP request is made to the following endpoint:
-http://127.0.0.1:8001/consumers/<consumer_name>/basic-auth
+  `http://127.0.0.1:8001/consumers/<consumer_name>/basic-auth`
 
 where `<consumer_name>` is the extracted base name (e.g., `lab-fundacion-telefonica`).
 
@@ -70,7 +70,7 @@ For each candidate credential:
 - **Querying the Kong Admin API for JWT Credentials:**  
 After validating the basic-auth credentials, the plugin queries the following endpoint:
 
-http://127.0.0.1:8001/consumers/<consumer_name>/jwt
+  `http://127.0.0.1:8001/consumers/<consumer_name>/jwt`
 
 to retrieve the JWT credentials associated with the consumer (company).
 
