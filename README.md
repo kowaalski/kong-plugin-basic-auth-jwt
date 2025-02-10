@@ -142,4 +142,55 @@ The username in basic authenthication and name of the key of jwt seed have to be
 
 ---
 
+# Using the Custom JWT Plugin with Kong Gateway
+
+## Overview
+
+Once the custom JWT plugin has been implemented and installed, we can leverage it to generate JWT tokens automatically. These tokens can then be used with Kong's built-in JWT authentication plugin to secure our routes and services.
+
+## How It Works
+
+1. **JWT Generation**: The custom plugin generates a JWT token upon successful authentication.
+2. **Kong JWT Plugin Integration**: We can configure Kong to require JWT authentication for specific routes and services.
+3. **Automatic Token Handling**: Employees and companies no longer need to manually generate or manage JWTs, as the custom plugin handles this automatically through an endpoint.
+
+## Steps to Integrate with Kong’s JWT Plugin
+
+### Step 1: Ensure the Custom JWT Plugin is Installed
+Make sure the `basic-auth-jwt` plugin is installed and working, as described in the previous installation guide.
+
+### Step 2: Configure Kong’s Built-in JWT Plugin
+You can set up Kong’s native JWT plugin to protect your services by requiring a valid JWT token.
+
+#### Example of enabling the Kong JWT plugin for a service:
+
+```sh
+curl -X POST http://localhost:8001/services/my-service/plugins \
+     --data "name=jwt"
+```
+
+This ensures that any request to `my-service` must include a valid JWT token.
+
+### Step 3: Use the Custom Plugin’s Generated JWT Token
+When a user logs in and authenticates through the custom `basic-auth-jwt` plugin, it automatically returns a JWT token.
+
+#### Example request using the generated token:
+
+```sh
+curl -X GET http://localhost:8000/protected-route \
+     -H "Authorization: Bearer <JWT-TOKEN>"
+```
+
+### Step 4: Automate JWT Handling for Employees and Companies
+With this setup:
+- Users don’t need to manually generate JWTs.
+- Employees and companies authenticate via the custom plugin.
+- The system automatically generates and returns the JWT.
+- Kong’s native JWT plugin validates requests without additional manual handling.
+
+### Conclusion
+By integrating the custom JWT plugin with Kong's native JWT authentication, we achieve a fully automated authentication system. Employees and companies no longer need to manage JWT tokens themselves, making security seamless and efficient. This approach provides a scalable way to manage authentication without additional complexity.
+
+---
+
 **This repository provides a robust authentication solution for Kong, ensuring seamless basic-auth and JWT token issuance for company employees.** 🚀
